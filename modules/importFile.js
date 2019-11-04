@@ -1,4 +1,4 @@
-let importFile = document.getElementById('import');
+let importFile = document.getElementById('selectedData');
 
 importFile.addEventListener('click', function() {
 	let selectRows = document.getElementsByClassName('select');
@@ -9,39 +9,51 @@ importFile.addEventListener('click', function() {
 		
 	let params = '';
 	let i = 0;
+	let tmpSelectRows = [];
+
+	do {
+		for(row of selectRows) {
+			tmpSelectRows.push(row.id);
+			row.classList.toggle('not-select');
+			row.classList.toggle('select');
+		}
+		selectRows = document.getElementsByClassName('select');
+	} while(selectRows.length > 0);
+
+	tmpSelectRows.sort(function(a, b) {
+		if(a > b) return 1;
+		if(a == b) return 0;
+		if(a < b) return -1;
+	});
+
+	selectRows = tmpSelectRows;
 
 	for(let row of selectRows) {
 
 		if(i == selectRows.length - 1) {
-			params += i + '=' + row.id;
+			params += i + '=' + row;
 		} else {
-			params += i + '=' + row.id + '&';
+			params += i + '=' + row + '&';
 		}
 
 		i++;
-
-		row.classList.toggle('not-select');
-		row.classList.toggle('select');
-
-		// for(let i = 0; i <= row.children.length; i++) {
-		// 	if(typeof columnsName[i] !== 'undefined') {
-		// 		// console.log(columnsName[i].innerText);
-		// 		if(row.children[i].innerText == '') {
-		// 			params += columnsName[i].innerText + '=' + row.children[i].innerText + ' ';
-		// 		} else {
-		// 			params += columnsName[i].innerText + '=' + row.children[i].innerText;
-		// 		}
-		// 		if(i != row.children.length) {
-		// 			params += '&';
-		// 		}	
-		// 	}
-		// }
 	}
 
 	request.responseType =	"json";
 	request.open("POST", url, true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+	// params += '&do=importSelectedRows';
 	request.send(params);
-	alert('ok');
+
+	let downloadFile = document.getElementById('downloadFile')
+	if(downloadFile.classList.contains('hide')) downloadFile.classList.remove('hide');
+
+	// importFile.setAttribute('href', '/modules/test.txt');
+	// importFile.setAttribute('download', 'test.txt');
+	// importFile.click();
+	// importFile.classList.add('hide');
+
+	// document.location.reload(true);
 
 });

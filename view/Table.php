@@ -29,6 +29,7 @@
 					</div>
 			</div>
 			<div class="row justify-content-center base__table">
+				<h3>Click for select or import all table</h3>
 					<div class="col-12">
 						<table id="table" class="table table-bordered">
 							<thead id="columnsName">
@@ -52,8 +53,15 @@
 			</div>
 			<div class="row justify-content-end">
 					<div class="d-flex px-3 my-3">
-						<button id="selectAll" class="btn-dark px-5 py-2 mr-3 text-uppercase rounded">Select all</button>
-						<button id="import" class="btn-dark px-5 py-2 text-uppercase rounded">Import to ADIF</button> 
+						<form action="index.php" method="post">
+							<input type="text" value="importSelectedData" name="do" hidden>
+							<button id="downloadFile" class="btn-dark px-5 py-2 mr-3 text-uppercase rounded hide">Download</button>
+						</form>
+						<button id="selectedData" class="btn-dark px-5 py-2 mr-3 text-uppercase rounded hide">Import selected data</button>
+						<form action="index.php" method="post">
+							<input type="text" value="importTable" name="do" hidden>
+							<button id="import" class="btn-dark px-5 py-2 text-uppercase rounded" type="submit">Import table to ADIF</button>
+						</form>
 					</div>
 				</div>
 
@@ -61,6 +69,7 @@
 	</body>
 </html>
 
-<script src="view/js/selectAll.js"></script>
+<!-- <script src="view/js/selectAll.js"></script> -->
 <script src="view/js/manualSelect.js"></script>
 <script src="modules/importFile.js"></script>
+<script src="modules/hideButtons.js"></script>

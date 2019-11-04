@@ -13,3 +13,11 @@ tr {
 .select {
 	background-color: #91ABFF;
 }
+
+.hide {
+	display: none;
+}
+
+#downloadFile {
+	text-decoration: none;
+}

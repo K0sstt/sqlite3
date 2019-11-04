@@ -26,25 +26,26 @@ class DataBase extends SQLite3
 		$this->open($dbName);
 	}
 
-	public function showLogQSO() {
+	public function getLogQSO() {
 		return $this->query('SELECT * FROM tbl_logQSO');
 	}
 
 	public function show($result) {
-		while ($row = $result->fetchArray()) {
+		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			echo "<pre>";
 			var_dump($row);
 			echo "</pre>";
 		}
-
+		exit();
 	}
 
 	public function showToArray($result) {
-		while ($row = $result->fetchArray()) {
+		while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 			echo "<pre>";
 			print_r($row);
 			echo "</pre>";
 		}
+		exit();
 	}
 
 }

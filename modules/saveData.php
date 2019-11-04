@@ -1,6 +1,9 @@
 <?php 
+
 $str = '';
+
 foreach($_POST as $value) {
-	$str .= 'key'.':'.$value.' ';
+	$str .= $value."\n";
 }
-file_put_contents('../test.txt', $str, FILE_APPEND);
+
+file_put_contents('QSO.adif', $str);
